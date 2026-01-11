@@ -26,7 +26,11 @@ const CarCard: React.FC<CarCardProps> = ({ car, onImageClick, isAdmin, onEdit, o
   }, [images.length]);
 
   const formatPrice = (value: number) => {
-    return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }).replace('R$', 'R$ ');
+    try {
+      return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }).replace('R$', 'R$ ');
+    } catch (e) {
+      return `R$ ${value}`;
+    }
   };
 
   return (
@@ -56,12 +60,14 @@ const CarCard: React.FC<CarCardProps> = ({ car, onImageClick, isAdmin, onEdit, o
         className="relative aspect-video overflow-hidden cursor-pointer bg-zinc-900"
         onClick={() => onImageClick(car)}
       >
-        {/* Crossfade Images - Dissolve Effect */}
         {images.map((src, index) => (
           <img 
             key={`${src}-${index}`}
             src={src} 
             alt={`${car.brand} ${car.model}`}
+            onError={(e) => {
+              e.currentTarget.src = 'https://placehold.co/600x400?text=Imagem+N%C3%A3o+Dispon%C3%ADvel';
+            }}
             className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out group-hover:scale-110 ${
               index === currentImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
             }`}
@@ -78,7 +84,6 @@ const CarCard: React.FC<CarCardProps> = ({ car, onImageClick, isAdmin, onEdit, o
           </div>
         )}
         
-        {/* Gallery Indicator dots */}
         {images.length > 1 && (
           <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
             {images.map((_, idx) => (
@@ -124,19 +129,19 @@ const CarCard: React.FC<CarCardProps> = ({ car, onImageClick, isAdmin, onEdit, o
             <div className="p-1.5 bg-gray-50 rounded-lg group-hover:bg-[#D4AF37]/10 transition-colors">
               <Gauge size={14} className="text-[#D4AF37]" />
             </div>
-            <span>{car.km.toLocaleString()} KM</span>
+            <span>{car.km?.toLocaleString() || 0} KM</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1.5 text-[9px] text-gray-400 uppercase font-black tracking-tighter">
             <div className="p-1.5 bg-gray-50 rounded-lg group-hover:bg-[#D4AF37]/10 transition-colors">
               <Fuel size={14} className="text-[#D4AF37]" />
             </div>
-            <span>{car.fuel}</span>
+            <span>{car.fuel || 'Flex'}</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1.5 text-[9px] text-gray-400 uppercase font-black tracking-tighter text-center">
             <div className="p-1.5 bg-gray-50 rounded-lg group-hover:bg-[#D4AF37]/10 transition-colors">
               <Settings2 size={14} className="text-[#D4AF37]" />
             </div>
-            <span className="truncate w-full">{car.transmission}</span>
+            <span className="truncate w-full">{car.transmission || 'Automático'}</span>
           </div>
         </div>
       </div>
