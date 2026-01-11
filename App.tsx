@@ -584,48 +584,40 @@ const App: React.FC = () => {
       )}
 
       {/* Footer */}
-      <footer className="bg-zinc-950 mt-16 pt-16 pb-8">
+      <footer className="bg-black mt-16 pt-16 pb-12 border-t border-zinc-900">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 items-start">
             {/* Logo and Description Section */}
             <div className="flex flex-col">
-              <div className="w-48 mb-6"><RoyalLogo className="w-full h-auto" /></div>
-              <p className="text-gray-500 text-sm max-w-sm leading-loose font-medium italic">
+              <div className="w-48 mb-6 transform -translate-x-4"><RoyalLogo className="w-full h-auto" /></div>
+              <p className="text-gray-500 text-[11px] max-w-sm leading-relaxed font-medium italic">
                 A Royal Motors é sinônimo de excelência e exclusividade. Nossa missão é oferecer curadoria de alto nível para quem busca veículos com procedência garantida e performance superior.
               </p>
             </div>
 
             {/* Quick Links Section */}
-            <div className="flex flex-col md:pl-12 md:pt-[120px]">
-              <ul className="space-y-6 text-sm text-gray-400 font-bold uppercase tracking-[0.2em]">
-                <li>
-                  <a href="https://api.whatsapp.com/send/?phone=5518996717436" target="_blank" rel="noopener noreferrer" className="hover:text-[#D4AF37] transition-colors">
-                    Financiamento
-                  </a>
-                </li>
-                <li>
-                  <a href="https://api.whatsapp.com/send/?phone=5518996717436" target="_blank" rel="noopener noreferrer" className="hover:text-[#D4AF37] transition-colors">
-                    Avalie Seu Carro
-                  </a>
-                </li>
-                <li>
-                  <button 
-                    onClick={() => isAdmin ? handleLogout() : setShowAuthModal(true)} 
-                    className="hover:text-[#D4AF37] transition-colors flex items-center gap-3"
-                  >
-                    {isAdmin ? <><LogOut size={16} /> Sair do Painel</> : <><Lock size={16} /> Acesso Vendedor</>}
-                  </button>
-                </li>
-              </ul>
+            <div className="flex flex-col md:pl-20 md:pt-40">
+              <nav className="space-y-6">
+                <a href="https://api.whatsapp.com/send/?phone=5518996717436" target="_blank" rel="noopener noreferrer" className="block text-white text-xs font-black uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors">
+                  FINANCIAMENTO
+                </a>
+                <a href="https://api.whatsapp.com/send/?phone=5518996717436" target="_blank" rel="noopener noreferrer" className="block text-white text-xs font-black uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors">
+                  AVALIE SEU CARRO
+                </a>
+                <button 
+                  onClick={() => isAdmin ? handleLogout() : setShowAuthModal(true)} 
+                  className="flex items-center gap-3 text-gray-500 text-xs font-black uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors"
+                >
+                  <Lock size={16} /> {isAdmin ? 'SAIR DO PAINEL' : 'Acesso Vendedor'}
+                </button>
+              </nav>
             </div>
 
             {/* Contact and Social Section */}
-            <div className="flex flex-col md:items-end md:pt-[120px]">
-              <a href="https://api.whatsapp.com/send/?phone=5518996717436" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-sm text-gray-400 mb-6 hover:text-white transition-colors group p-1 pr-4 bg-zinc-900/50 rounded-xl">
-                <div className="p-3 bg-zinc-900 rounded-lg group-hover:bg-[#D4AF37] transition-colors">
-                  <Phone size={20} className="text-[#D4AF37] group-hover:text-white" />
-                </div>
-                <span className="font-black tracking-[0.1em] group-hover:underline">(18) 99671-7436</span>
+            <div className="flex flex-col md:items-end md:pt-40">
+              <a href="https://api.whatsapp.com/send/?phone=5518996717436" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 text-sm text-gray-300 mb-8 hover:text-white transition-colors group p-3 px-6 bg-zinc-900/40 rounded-full border border-zinc-800/50">
+                <Phone size={18} className="text-[#D4AF37]" />
+                <span className="font-black tracking-[0.1em]">(18) 99671-7436</span>
               </a>
               
               <div className="flex gap-4">
@@ -633,26 +625,26 @@ const App: React.FC = () => {
                   href="https://maps.app.goo.gl/fKu3DAs4FWszjQVD9" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="p-4 bg-zinc-900 rounded-2xl hover:bg-[#D4AF37] hover:text-white text-gray-500 transition-all hover:-translate-y-1 shadow-2xl"
+                  className="p-4 bg-zinc-900/60 rounded-xl hover:bg-[#D4AF37] hover:text-white text-gray-500 transition-all hover:-translate-y-1"
                   title="Como Chegar"
                 >
-                  <MapPin size={24} />
+                  <MapPin size={22} />
                 </a>
                 <a 
                   href="https://www.instagram.com/royalmotors_ppta/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="p-4 bg-zinc-900 rounded-2xl hover:bg-[#D4AF37] hover:text-white text-gray-500 transition-all hover:-translate-y-1 shadow-2xl"
+                  className="p-4 bg-zinc-900/60 rounded-xl hover:bg-[#D4AF37] hover:text-white text-gray-500 transition-all hover:-translate-y-1"
                   title="Instagram"
                 >
-                  <Instagram size={24} />
+                  <Instagram size={22} />
                 </a>
               </div>
             </div>
           </div>
 
-          <div className="pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] text-zinc-700 font-bold tracking-[0.2em] uppercase">
-            <p>© 2024 Royal Motors • Compra Venda Troca</p>
+          <div className="pt-8 border-t border-zinc-900/50 flex flex-col md:flex-row justify-between items-center text-[10px] text-zinc-700 font-bold tracking-[0.2em] uppercase">
+            <p>© 2024 ROYAL MOTORS • COMPRA VENDA TROCA</p>
           </div>
         </div>
       </footer>
